@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="./output.css" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+    <h1 class="bg-slate-500 fill-red-300" >32u9br32rh3r 23r23 r23r23r23b ddw d </h1>
+
+
+    <div>
+        <label for="price" class="block text-sm font-medium leading-6 text-gray-900">Price</label>
+        <div class="relative mt-2 rounded-md shadow-sm">
+          <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+            <span class="text-gray-500 sm:text-sm">$</span>
+          </div>
+          <input type="text" name="price" id="price" class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="0.00">
+          <div class="absolute inset-y-0 right-0 flex items-center">
+            <label for="currency" class="sr-only">Currency</label>
+            <select id="currency" name="currency" class="h-full rounded-md border-0 bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm">
+              <option>USD</option>
+              <option>CAD</option>
+              <option>EUR</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+    <div class="flex justify-center items-center caret-purple-800 w-full ">
+
+        
+       <div>
+        <label class="w-3 bg-black text-cyan-50 font-bold" for="">Product</label>
+       <input class="inp" id="product" type="text"><br>
+       </div>
+       <div>
+        <label for="">Quantity</label>
+       <input class="inp" id="quantity" type="text"><br>
+       </div>
+       <div>
+        <label for="">Price</label>
+       <input class="inp" id="price" type="text"><br>
+       </div>
+       <div>
+        <label for="">Product Image</label>
+       <input class="inp" type="image"> <br>
+       </div>
+
+       <button onclick="postProduct()">Post Product</button>
+
+    </div>
+</body>
+</html>
+<script>
+   const firebaseConfig = {
+      apiKey: "AIzaSyDz1tkekIuGnunNskI0jh-0U9M3DSW5CaM",
+      authDomain: "ecommerce-project-d0be2.firebaseapp.com",
+      projectId: "ecommerce-project-d0be2",
+      storageBucket: "ecommerce-project-d0be2.appspot.com",
+      messagingSenderId: "417084664837",
+      appId: "1:417084664837:web:74192f8810d159a459806c"
+    };
+  
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  </script>
+
+  <script>
+    let product = document.getElementById("product");
+    let quantity = document.getElementById("quantity");
+    let img = document.getElementById("img");
+    let price = document.getElementById("price");
+
+    // function addProduct(){
+    //     if(product.value == ''){
+    //     alert("Enter a prodiuct")
+    // } else{
+    //     let productType = product.value; 
+    //     console.log(productType)
+    // }
+    // }
+
+
+    function postProduct(){
+        // Add a new document in collection "cities"
+        db.collection("products").doc().set({
+           product: product.value, 
+           quantity: quantity.value, 
+           price: price.value
+        })
+        .then(() => {
+            alert("Product successfully updated")
+            console.log("Document successfully written!");
+        })
+        .catch((error) => {
+            console.error("Error writing document: ", error);
+        });
+    }
+
+  </script>
+
+

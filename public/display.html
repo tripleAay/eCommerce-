@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <!-- <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script> -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+</head>
+<style>
+  .container div {
+    margin-bottom: 15px;
+  }
+
+  .inp {
+    margin-right: 10px;
+  }
+</style>
+
+<body>
+  <div class="container">
+    <h1 id="disp"> </h1>
+
+  </div>
+
+
+
+
+</body>
+
+</html>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDz1tkekIuGnunNskI0jh-0U9M3DSW5CaM",
+    authDomain: "ecommerce-project-d0be2.firebaseapp.com",
+    projectId: "ecommerce-project-d0be2",
+    storageBucket: "ecommerce-project-d0be2.appspot.com",
+    messagingSenderId: "417084664837",
+    appId: "1:417084664837:web:74192f8810d159a459806c"
+  };
+
+  // Initialize Firebase
+  const app = firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+</script>
+
+<script>
+  let disp = document.getElementById("disp"); 
+
+  // function addProduct(){
+  //     if(product.value == ''){
+  //     alert("Enter a prodiuct")
+  // } else{
+  //     let productType = product.value; 
+  //     console.log(productType)
+  // }
+  // }
+  function displayProd() {
+    db.collection("products").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+        disp.innerHTML += `
+        
+        <div>
+          <h4>${doc.data().product}</h4>
+          <p>${doc.data().quantity}</p>
+          <p>${doc.data().price}</p>
+        </div>
+        
+        `
+      });
+    });
+  }
+
+  displayProd();
+
+</script>
